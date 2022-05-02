@@ -1,25 +1,24 @@
 //
-//  ViewController.swift
+//  SearchSongsViewController.swift
 //  iOSArchitecturesDemo
 //
-//  Created by ekireev on 14.02.2018.
-//  Copyright © 2018 ekireev. All rights reserved.
+//  Created by user on 29.04.2022.
+//  Copyright © 2022 ekireev. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
-final class SearchViewController: UIViewController {
-    
+class SearchSongsViewController: UIViewController {
     // MARK: - Private Properties
+    private let presenter: SearchSongViewOutput
+    private let imageDownloader = ImageDownloader()
     
-    private let presenter: SearchViewOutput
-    
-    private var searchView: SearchView {
-        return self.view as! SearchView
+    private var searchView: SearchSongsView {
+        return self.view as! SearchSongsView
     }
     
-    private let searchService = ITunesSearchService()
-    internal var searchResults = [ITunesApp]() {
+    internal  var searchResults = [ITunesSong]() {
         didSet {
             searchView.tableView.isHidden = false
             searchView.tableView.reloadData()
@@ -27,14 +26,10 @@ final class SearchViewController: UIViewController {
         }
     }
     
-    private struct Constants {
-        static let reuseIdentifier = "reuseId"
-    }
-    
     //MARK: - Construction
-    
-    init(presetner: SearchViewOutput) {
-        self.presenter = presetner
+
+    init(presenter: SearchSongViewOutput) {
+        self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -42,97 +37,89 @@ final class SearchViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     // MARK: - Lifecycle
     
     override func loadView() {
         super.loadView()
-        self.view = SearchView()
+        self.view = SearchSongsView()
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.searchView.searchBar.delegate = self
-        self.searchView.tableView.register(AppCell.self, forCellReuseIdentifier: Constants.reuseIdentifier)
-        self.searchView.tableView.delegate = self
+        self.searchView.tableView.register(SongCall.self, forCellReuseIdentifier: "reuseIdCell")
         self.searchView.tableView.dataSource = self
+        self.searchView.tableView.delegate = self
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.throbber(show: false)
     }
-   
-}
 
+}
 //MARK: - UITableViewDataSource
-extension SearchViewController: UITableViewDataSource {
-    
+extension SearchSongsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchResults.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let dequeuedCell = tableView.dequeueReusableCell(withIdentifier: Constants.reuseIdentifier, for: indexPath)
-        guard let cell = dequeuedCell as? AppCell else {
+        let dequeuedCell = tableView.dequeueReusableCell(withIdentifier: "reuseIdCell", for: indexPath)
+        guard let cell = dequeuedCell as? SongCall else {
             return dequeuedCell
         }
-        let app = self.searchResults[indexPath.row]
-        let cellModel = AppCellModelFactory.cellModel(from: app)
+        let item = searchResults[indexPath.row]
+        guard let url = item.artwork else {
+            return cell
+        }
+        imageDownloader.getImage(fromUrl: url) { image, error in
+            cell.imageSong.image = image
+        }
+        let cellModel = SongCellModelFactory.getCellModel(with: item)
         cell.configure(with: cellModel)
         return cell
     }
 }
 
-//MARK: - UITableViewDelegate
-extension SearchViewController: UITableViewDelegate {
+extension SearchSongsViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let app = searchResults[indexPath.row]
-        let appDetaillViewController = AppDetailViewController(app: app)
-        //        appDetaillViewController.app = app
-        navigationController?.pushViewController(appDetaillViewController, animated: true)
-    }
 }
 
 //MARK: - UISearchBarDelegate
-extension SearchViewController: UISearchBarDelegate {
-    
+extension SearchSongsViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let query = searchBar.text else {
             searchBar.resignFirstResponder()
             return
         }
+        
         if query.count == 0 {
             searchBar.resignFirstResponder()
             return
         }
-        self.presenter.viewDidSearch(with: query)
+        presenter.viewDidSearch(with: query)
     }
 }
 
-extension SearchViewController: SearchViewInput {
-    
-    func throbber(show: Bool) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = show
-    }
-    
-    func showError(error: Error) {
+//MARK: - SearchSongViewInput
+extension SearchSongsViewController: SearchSongViewInput {
+     func showError(error: Error) {
         let alert = UIAlertController(title: "Error", message: "\(error.localizedDescription)", preferredStyle: .alert)
         let actionOk = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(actionOk)
         self.present(alert, animated: true, completion: nil)
     }
-    func showNoResults() {
+   
+    func throbber(show: Bool) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = show
+    }
+    
+   func shwoNoResilts() {
         self.searchView.emptyResultView.isHidden = false
-        self.searchResults = []
-        searchView.tableView.reloadData()
     }
     
     func hideNoResults() {
         self.searchView.emptyResultView.isHidden = true
     }
-    
 }

@@ -17,3 +17,12 @@ class SearchModulBuilder{
         return viewController
     }
 }
+
+class SearchSongModulBuilder {
+    static func build() -> (UIViewController & SearchSongViewInput) {
+        let presenter = SearchSongPresenter()
+        let viewController = SearchSongsViewController(presenter: presenter)
+        presenter.inputViewController = viewController
+        return viewController
+    }
+}

@@ -19,12 +19,28 @@ final class AppStartManager {
     func start() {
         let rootVC = SearchModulBuilder.biuld()
         rootVC.navigationItem.title = "Search via iTunes"
-        
         let navVC = self.configuredNavigationController
         navVC.viewControllers = [rootVC]
         
-        window?.rootViewController = navVC
-        window?.makeKeyAndVisible()
+        let vc2 = SearchSongModulBuilder.build()
+        navVC.title = "Store"
+        vc2.title = "Music"
+        
+        let tabBarController = UITabBarController()
+        tabBarController.setViewControllers([navVC, vc2], animated: true)
+        
+        guard let items = tabBarController.tabBar.items else {
+            return
+        }
+        let images = ["cart", "music.note"]
+        
+        for i in 0...1 {
+            if #available(iOS 13.0, *) {
+                items[i].image = UIImage(systemName: images[i])
+            }
+            window?.rootViewController = tabBarController
+            window?.makeKeyAndVisible()
+        }
     }
     
     private lazy var configuredNavigationController: UINavigationController = {

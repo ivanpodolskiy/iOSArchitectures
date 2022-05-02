@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 protocol SearchViewInput: class {
     var searchResults: [ITunesApp] { get set}
@@ -26,7 +27,6 @@ protocol SearchViewOutput: class {
 class SearchPresenter {
     
     weak var viewInput: (UIViewController & SearchViewInput)?
-    
     
     private let searchService = ITunesSearchService()
     

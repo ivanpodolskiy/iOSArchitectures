@@ -1,0 +1,91 @@
+//
+//  SearchSongsView.swift
+//  iOSArchitecturesDemo
+//
+//  Created by user on 29.04.2022.
+//  Copyright © 2022 ekireev. All rights reserved.
+//
+
+import Foundation
+import UIKit
+
+final class SearchSongsView: UIView {
+    // MARK: - Subviews
+
+    let searchBar = UISearchBar()
+    let tableView = UITableView()
+    let emptyResultView = UIView()
+    let emptyResultLabel = UILabel()
+    
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.configureUI()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.configureUI()
+    }
+    
+    private func configureUI() {
+        self.backgroundColor = .white
+        self.addSearchBar()
+        self.addTableView()
+        self.addEmptyResult()
+        self.setupConstraints()
+    }
+    
+    private func addSearchBar() {
+        self.searchBar.translatesAutoresizingMaskIntoConstraints = false
+        self.searchBar.searchBarStyle = .minimal
+        addSubview(self.searchBar)
+    }
+    
+    private func addTableView() {
+        self.tableView.translatesAutoresizingMaskIntoConstraints = false
+        self.tableView.rowHeight = 72.0
+        self.tableView.separatorInset = UIEdgeInsets(top: 0.0, left: 12.0, bottom: 0.0, right: 0.0)
+        self.tableView.isHidden = true
+        self.tableView.tableFooterView = UIView()
+        addSubview(self.tableView)
+    }
+    
+    private func addEmptyResult(){
+        self.emptyResultView.translatesAutoresizingMaskIntoConstraints = false
+        self.emptyResultView.backgroundColor = .white
+        self.emptyResultView.isHidden = true
+        
+        self.emptyResultLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.emptyResultLabel.textColor = .systemGray
+        self.emptyResultLabel.text = "Nothing was found"
+        self.emptyResultLabel.textAlignment = .center
+        self.emptyResultLabel.font = UIFont.systemFont(ofSize: 12.0)
+        
+        addSubview(self.emptyResultView)
+        self.emptyResultView.addSubview(self.emptyResultLabel)
+    }
+    
+    private func setupConstraints(){
+        let safeArea = self.safeAreaLayoutGuide
+        
+        NSLayoutConstraint.activate([
+            self.searchBar.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 8.0),
+            self.searchBar.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            self.searchBar.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+            
+            self.tableView.topAnchor.constraint(equalTo: self.searchBar.bottomAnchor),
+            self.tableView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            self.tableView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+            self.tableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
+            
+            self.emptyResultView.topAnchor.constraint(equalTo: self.searchBar.bottomAnchor),
+            self.emptyResultView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            self.emptyResultView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+            self.emptyResultView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
+            self.emptyResultLabel.topAnchor.constraint(equalTo: self.emptyResultView.topAnchor, constant: 12.0),
+            self.emptyResultLabel.leadingAnchor.constraint(equalTo: self.emptyResultView.leadingAnchor),
+            self.emptyResultLabel.trailingAnchor.constraint(equalTo: self.emptyResultView.trailingAnchor)
+            ])
+    }
+}

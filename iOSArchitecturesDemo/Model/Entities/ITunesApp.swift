@@ -11,7 +11,9 @@ import UIKit
 public struct ITunesApp: Codable {
     
     public typealias Bytes = Int
-    
+    public let currentVersionReleaseDate: String
+    public let version: String
+    public let releaseNotes: String
     public let appName: String
     public let appUrl: String?
     public let company: String?
@@ -26,6 +28,9 @@ public struct ITunesApp: Codable {
     // MARK: - Codable
     
     private enum CodingKeys: String, CodingKey {
+        case currentVersionReleaseDate = "currentVersionReleaseDate"
+        case version = "version"
+        case releaseNotes = "releaseNotes"
         case appName = "trackName"
         case appUrl = "artistViewUrl"
         case company = "sellerName"
@@ -50,11 +55,17 @@ public struct ITunesApp: Codable {
         self.size = (try? container.decode(String.self, forKey: .size)) >>- { Bytes($0) }
         self.iconUrl = try? container.decode(String.self, forKey: .iconUrl)
         self.screenshotUrls = (try? container.decode([String].self, forKey: .screenshotUrls)) ?? []
+        self.releaseNotes = try container.decode(String.self, forKey: .releaseNotes)
+        self.version = try container.decode(String.self, forKey: .version)
+        self.currentVersionReleaseDate = try container.decode(String.self, forKey: .currentVersionReleaseDate)
     }
     
     // MARK: - Init
     
-    internal init(appName: String,
+    internal init(currentVersionReleaseDate: String,
+                  version: String,
+                  releaseNotes: String,
+                  appName: String,
                   appUrl: String?,
                   company: String?,
                   companyUrl: String?,
@@ -64,6 +75,8 @@ public struct ITunesApp: Codable {
                   size: Bytes?,
                   iconUrl: String?,
                   screenshotUrls: [String]) {
+        self.version = version
+        self.releaseNotes = releaseNotes
         self.appName = appName
         self.appUrl = appUrl
         self.company = company
@@ -74,5 +87,6 @@ public struct ITunesApp: Codable {
         self.size = size
         self.iconUrl = iconUrl
         self.screenshotUrls = screenshotUrls
+        self.currentVersionReleaseDate = currentVersionReleaseDate
     }
 }
