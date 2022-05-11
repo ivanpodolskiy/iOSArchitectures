@@ -11,14 +11,12 @@ import UIKit
 final class SearchView: UIView {
     
     // MARK: - Subviews
-    
     let searchBar = UISearchBar()
     let tableView = UITableView()
     let emptyResultView = UIView()
     let emptyResultLabel = UILabel()
     
     // MARK: - Init
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.configureUI()
@@ -30,7 +28,6 @@ final class SearchView: UIView {
     }
     
     // MARK: - UI
-    
     private func configureUI() {
         self.backgroundColor = .white
         self.addSearchBar()
@@ -58,13 +55,11 @@ final class SearchView: UIView {
         self.emptyResultView.translatesAutoresizingMaskIntoConstraints = false
         self.emptyResultView.backgroundColor = .white
         self.emptyResultView.isHidden = true
-        
         self.emptyResultLabel.translatesAutoresizingMaskIntoConstraints = false
         self.emptyResultLabel.text = "Nothing was found"
         self.emptyResultLabel.textColor = UIColor.darkGray
         self.emptyResultLabel.textAlignment = .center
         self.emptyResultLabel.font = UIFont.systemFont(ofSize: 12.0)
-        
         self.addSubview(self.emptyResultView)
         self.emptyResultView.addSubview(self.emptyResultLabel)
     }
@@ -89,6 +84,6 @@ final class SearchView: UIView {
             self.emptyResultLabel.topAnchor.constraint(equalTo: self.emptyResultView.topAnchor, constant: 12.0),
             self.emptyResultLabel.leadingAnchor.constraint(equalTo: self.emptyResultView.leadingAnchor),
             self.emptyResultLabel.trailingAnchor.constraint(equalTo: self.emptyResultView.trailingAnchor)
-            ])
+        ])
     }
 }

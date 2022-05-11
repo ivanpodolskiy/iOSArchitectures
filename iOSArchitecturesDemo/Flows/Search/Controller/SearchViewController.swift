@@ -11,6 +11,7 @@ import UIKit
 final class SearchViewController: UIViewController {
     
     // MARK: - Private Properties
+    
     private let presenter: SearchViewOutput
     
     private var searchView: SearchView {
@@ -29,7 +30,9 @@ final class SearchViewController: UIViewController {
     private struct Constants {
         static let reuseIdentifier = "reuseId"
     }
+    
     //MARK: - Construction
+    
     init(presetner: SearchViewOutput) {
         self.presenter = presetner
         super.init(nibName: nil, bundle: nil)
@@ -38,7 +41,10 @@ final class SearchViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
     // MARK: - Lifecycle
+    
     override func loadView() {
         super.loadView()
         self.view = SearchView()
@@ -57,35 +63,43 @@ final class SearchViewController: UIViewController {
         super.viewWillDisappear(animated)
         self.throbber(show: false)
     }
+   
 }
 
 //MARK: - UITableViewDataSource
 extension SearchViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchResults.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let dequeuedCell = tableView.dequeueReusableCell(withIdentifier: Constants.reuseIdentifier, for: indexPath)
-        guard let cell = dequeuedCell as? AppCell else { return dequeuedCell }
+        guard let cell = dequeuedCell as? AppCell else {
+            return dequeuedCell
+        }
         let app = self.searchResults[indexPath.row]
         let cellModel = AppCellModelFactory.cellModel(from: app)
         cell.configure(with: cellModel)
         return cell
     }
 }
+
 //MARK: - UITableViewDelegate
 extension SearchViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let app = searchResults[indexPath.row]
-        let appDetaillViewController = MainAppDetailViewController(app: app)
+        let appDetaillViewController = AppDetailViewController(app: app)
         //        appDetaillViewController.app = app
         navigationController?.pushViewController(appDetaillViewController, animated: true)
     }
 }
+
 //MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let query = searchBar.text else {
             searchBar.resignFirstResponder()
@@ -100,9 +114,11 @@ extension SearchViewController: UISearchBarDelegate {
 }
 
 extension SearchViewController: SearchViewInput {
+    
     func throbber(show: Bool) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = show
     }
+    
     func showError(error: Error) {
         let alert = UIAlertController(title: "Error", message: "\(error.localizedDescription)", preferredStyle: .alert)
         let actionOk = UIAlertAction(title: "OK", style: .cancel, handler: nil)
@@ -114,7 +130,9 @@ extension SearchViewController: SearchViewInput {
         self.searchResults = []
         searchView.tableView.reloadData()
     }
+    
     func hideNoResults() {
         self.searchView.emptyResultView.isHidden = true
     }
+    
 }

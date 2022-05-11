@@ -13,8 +13,6 @@ final class AppDetailViewController: UIViewController {
     let app: ITunesApp
         
     lazy var headerViewController = AppDetailHeaderViewController(app: app)
-    
-    lazy var updateViewController = AppDetailUpdateViewController(app: app)
 
     //MARK: - Construction
     
@@ -57,17 +55,6 @@ final class AppDetailViewController: UIViewController {
     
   
     private func addDescriptionViewController() {
-        addChild(updateViewController)
-        view.addSubview(updateViewController.view)
-        updateViewController.didMove(toParent: self)
-        
-        updateViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            updateViewController.view.topAnchor.constraint(equalTo: headerViewController.view.bottomAnchor),
-            updateViewController.view.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-            updateViewController.view.rightAnchor.constraint(equalTo: self.view.rightAnchor)
-        ])
         
     }
 

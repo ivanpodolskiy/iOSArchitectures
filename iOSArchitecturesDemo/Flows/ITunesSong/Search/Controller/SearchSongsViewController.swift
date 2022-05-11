@@ -83,7 +83,12 @@ extension SearchSongsViewController: UITableViewDataSource {
 }
 
 extension SearchSongsViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let song = searchResults[indexPath.row]
+        let detailViewController = DetailSongViewController(song: song)
+        navigationController?.pushViewController(detailViewController, animated: true)
+    }
 }
 
 //MARK: - UISearchBarDelegate

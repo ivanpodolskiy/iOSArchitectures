@@ -17,21 +17,25 @@ final class AppStartManager {
     }
     
     func start() {
-        let rootVC = SearchModulBuilder.biuld()
-        rootVC.navigationItem.title = "Search via iTunes"
-        let navVC = self.configuredNavigationController
-        navVC.viewControllers = [rootVC]
+        let vc1 = SearchModulBuilder.biuld()
+        vc1.navigationItem.title = "Search via iTunes"
+        let navigationViewControllerFirst = self.configuredNavigationController(rootController: vc1)
         
         let vc2 = SearchSongModulBuilder.build()
-        navVC.title = "Store"
-        vc2.title = "Music"
+        vc2.navigationItem.title = "Search view Music"
+        let navigationControllerSecond = self.configuredNavigationController(rootController: vc2)
+        
+        navigationViewControllerFirst.title = "Store"
+        navigationControllerSecond.title = "Music"
         
         let tabBarController = UITabBarController()
-        tabBarController.setViewControllers([navVC, vc2], animated: true)
+        tabBarController.tabBar.tintColor = .systemRed
+        tabBarController.setViewControllers([navigationViewControllerFirst, navigationControllerSecond], animated: true)
         
         guard let items = tabBarController.tabBar.items else {
             return
         }
+        
         let images = ["cart", "music.note"]
         
         for i in 0...1 {
@@ -43,12 +47,12 @@ final class AppStartManager {
         }
     }
     
-    private lazy var configuredNavigationController: UINavigationController = {
-        let navVC = UINavigationController()
+    private func configuredNavigationController(rootController: UIViewController) ->UINavigationController {
+        let navVC = UINavigationController.init(rootViewController: rootController)
         navVC.navigationBar.barTintColor = UIColor.varna
         navVC.navigationBar.isTranslucent = false
         navVC.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navVC.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         return navVC
-    }()
+    }
 }

@@ -10,9 +10,8 @@ import Foundation
 import UIKit
 
 class AppDetailUpdateView: UIView {
-    
     private(set) lazy var titleLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 20)
@@ -26,13 +25,11 @@ class AppDetailUpdateView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("История версий", for: .normal)
         button.backgroundColor = .clear
-        
-
         return button
     }()
     
     private(set) lazy var versionUpdateLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .lightGray
         label.font = UIFont.systemFont(ofSize: 14)
@@ -40,7 +37,7 @@ class AppDetailUpdateView: UIView {
     }()
     
     private (set) lazy var dateUpdateLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .lightGray
         label.font = UIFont.systemFont(ofSize: 14)
@@ -48,13 +45,11 @@ class AppDetailUpdateView: UIView {
     }()
     
     private(set) lazy var descriptionUpdateLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 15)
         label.numberOfLines = 0
-//        label.lineBreakMode = NSLineBreakMode.byWordWrapping
-//        label.sizeToFit()
         return label
     }()
     
@@ -76,7 +71,6 @@ class AppDetailUpdateView: UIView {
         addSubview(versionUpdateLabel)
         addSubview(dateUpdateLabel)
         addSubview(descriptionUpdateLabel)
-        
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
