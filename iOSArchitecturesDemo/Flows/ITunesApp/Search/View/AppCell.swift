@@ -8,11 +8,35 @@
 
 import UIKit
 
+ class Icon {
+    static let notDownloadedIcon = "arrow.down.to.line.circle.fill"
+    static let downloaded = "chevron.down.circle"
+}
+
 final class AppCell: UITableViewCell {
-    
+
     // MARK: - Subviews
+    private(set) lazy var indicatorDownload: UILabel = {
+       let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .systemGray
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 13.0)
+        return label
+    }()
+    
+    private(set) lazy var downloadIcon: UIImageView = {
+        let imageView = UIImageView()
+        if #available(iOS 13.0, *) {
+            imageView.image = UIImage(systemName: Icon.notDownloadedIcon )
+        }
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     private(set) lazy var titleLabel: UILabel = {
         let label = UILabel()
+        label.text = "Тест"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 16.0)
@@ -46,22 +70,26 @@ final class AppCell: UITableViewCell {
         self.configureUI()
     }
     
-    // MARK: - Methods
-    func configure(with cellModel: AppCellModel) {
-        self.titleLabel.text = cellModel.title
-        self.subtitleLabel.text = cellModel.subtitle
-        self.ratingLabel.text = cellModel.rating
-    }
-    
     // MARK: - UI
     override func prepareForReuse() {
-        [self.titleLabel, self.subtitleLabel, self.ratingLabel].forEach { $0.text = nil }
+        [self.titleLabel, self.subtitleLabel, self.ratingLabel, self.indicatorDownload].forEach { $0.text = nil }
     }
     
     private func configureUI() {
+        self.addIconDownolad()
         self.addTitleLabel()
         self.addSubtitleLabel()
         self.addRatingLabel()
+        self.addIndicatorDownload()
+    }
+    
+    private func addIconDownolad() {
+        self.contentView.addSubview(self.downloadIcon)
+        NSLayoutConstraint.activate([
+            self.downloadIcon.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 8.0),
+            self.downloadIcon.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -30.0),
+            self.downloadIcon.widthAnchor.constraint(equalToConstant: 40.0),
+            self.downloadIcon.heightAnchor.constraint(equalToConstant: 40.0),])
     }
     
     private func addTitleLabel() {
@@ -69,7 +97,7 @@ final class AppCell: UITableViewCell {
         NSLayoutConstraint.activate([
             self.titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 8.0),
             self.titleLabel.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: 12.0),
-            self.titleLabel.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -40.0)
+            self.titleLabel.rightAnchor.constraint(equalTo: self.downloadIcon.leftAnchor, constant: -12)
         ])
     }
     
@@ -78,7 +106,7 @@ final class AppCell: UITableViewCell {
         NSLayoutConstraint.activate([
             self.subtitleLabel.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 4.0),
             self.subtitleLabel.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: 12.0),
-            self.subtitleLabel.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -40.0)
+            self.subtitleLabel.rightAnchor.constraint(equalTo: self.downloadIcon.leftAnchor, constant: -12.0)
         ])
     }
     
@@ -87,7 +115,16 @@ final class AppCell: UITableViewCell {
         NSLayoutConstraint.activate([
             self.ratingLabel.topAnchor.constraint(equalTo: self.subtitleLabel.bottomAnchor, constant: 4.0),
             self.ratingLabel.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: 12.0),
-            self.ratingLabel.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -40.0)
+            self.ratingLabel.rightAnchor.constraint(equalTo: self.downloadIcon.leftAnchor, constant: -30.0)
         ])
+    }
+
+    private func addIndicatorDownload() {
+        self.contentView.addSubview(self.indicatorDownload)
+        NSLayoutConstraint.activate([
+            self.indicatorDownload.widthAnchor.constraint(equalToConstant: 100),
+            self.indicatorDownload.topAnchor.constraint(equalTo: self.ratingLabel.topAnchor),
+            self.indicatorDownload.leftAnchor.constraint(equalTo: self.ratingLabel.rightAnchor, constant: 8.0),
+            self.indicatorDownload.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -8.0)])
     }
 }
