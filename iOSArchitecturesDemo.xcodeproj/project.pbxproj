@@ -15,6 +15,7 @@
 		CE95153F28141F4100009F28 /* AppDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95153E28141F4100009F28 /* AppDetailHeaderView.swift */; };
 		CE9515412815D70000009F28 /* AppDetailHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9515402815D70000009F28 /* AppDetailHeaderViewController.swift */; };
 		CEAFB08028254B8000074327 /* AppDeatilScreenshotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAFB07F28254B8000074327 /* AppDeatilScreenshotViewController.swift */; };
+		CEBF96FE283448880061DA36 /* AppDetailFullSreenViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF96FD283448880061DA36 /* AppDetailFullSreenViewCell.swift */; };
 		CEDC51DC281B090400AE7B86 /* AppDetailUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC51DB281B090400AE7B86 /* AppDetailUpdateViewController.swift */; };
 		CEDC51DE281B093F00AE7B86 /* AppDetailUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC51DD281B093F00AE7B86 /* AppDetailUpdateView.swift */; };
 		CEDC51E7281C632E00AE7B86 /* SearchSongsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC51E6281C632E00AE7B86 /* SearchSongsViewController.swift */; };
@@ -59,6 +60,7 @@
 		CE95153E28141F4100009F28 /* AppDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailHeaderView.swift; sourceTree = "<group>"; };
 		CE9515402815D70000009F28 /* AppDetailHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailHeaderViewController.swift; sourceTree = "<group>"; };
 		CEAFB07F28254B8000074327 /* AppDeatilScreenshotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDeatilScreenshotViewController.swift; sourceTree = "<group>"; };
+		CEBF96FD283448880061DA36 /* AppDetailFullSreenViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailFullSreenViewCell.swift; sourceTree = "<group>"; };
 		CEDC51DB281B090400AE7B86 /* AppDetailUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailUpdateViewController.swift; sourceTree = "<group>"; };
 		CEDC51DD281B093F00AE7B86 /* AppDetailUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailUpdateView.swift; sourceTree = "<group>"; };
 		CEDC51E6281C632E00AE7B86 /* SearchSongsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSongsViewController.swift; sourceTree = "<group>"; };
@@ -113,12 +115,12 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		CE0DF332282C47BD0085C8AA /* FullScreen */ = {
+		CE0DF332282C47BD0085C8AA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				CE0DF333282C47E90085C8AA /* FullScreenViewController.swift */,
 			);
-			path = FullScreen;
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		CE0DF335282EC1DE0085C8AA /* Observable */ = {
@@ -153,11 +155,37 @@
 			path = Builder;
 			sourceTree = "<group>";
 		};
+		CEBF96FC28341A330061DA36 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				CEDC51FA2821612E00AE7B86 /* AppDeatilScreenshotViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		CEBF97002834513C0061DA36 /* ScreenshotView */ = {
+			isa = PBXGroup;
+			children = (
+				CE0DF332282C47BD0085C8AA /* Controller */,
+				CEBF9701283451630061DA36 /* Cell */,
+			);
+			path = ScreenshotView;
+			sourceTree = "<group>";
+		};
+		CEBF9701283451630061DA36 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				CEBF96FD283448880061DA36 /* AppDetailFullSreenViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		CEDC51DF281C626700AE7B86 /* ITunesApp */ = {
 			isa = PBXGroup;
 			children = (
 				E0E1D2A62034A36C0011E01A /* Search */,
 				E0E1D2A72034A3780011E01A /* AppDetail */,
+				CEBF97002834513C0061DA36 /* ScreenshotView */,
 			);
 			path = ITunesApp;
 			sourceTree = "<group>";
@@ -378,8 +406,8 @@
 		F8114FC222A3E74E00102830 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CEBF96FC28341A330061DA36 /* Cell */,
 				F8114FC422A3E77500102830 /* AppDetailView.swift */,
-				CEDC51FA2821612E00AE7B86 /* AppDeatilScreenshotViewCell.swift */,
 				CE95153E28141F4100009F28 /* AppDetailHeaderView.swift */,
 				CEDC51DD281B093F00AE7B86 /* AppDetailUpdateView.swift */,
 			);
@@ -389,10 +417,9 @@
 		F8114FC322A3E75300102830 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				CE0DF332282C47BD0085C8AA /* FullScreen */,
 				CEAFB07F28254B8000074327 /* AppDeatilScreenshotViewController.swift */,
-				CEDC51DB281B090400AE7B86 /* AppDetailUpdateViewController.swift */,
 				E0E1D3D0203C48D70011E01A /* MainAppDetailViewController.swift */,
+				CEDC51DB281B090400AE7B86 /* AppDetailUpdateViewController.swift */,
 				CE9515402815D70000009F28 /* AppDetailHeaderViewController.swift */,
 			);
 			path = Controller;
@@ -597,6 +624,7 @@
 				CEDC51FB2821612E00AE7B86 /* AppDeatilScreenshotViewCell.swift in Sources */,
 				F8114FC522A3E77500102830 /* AppDetailView.swift in Sources */,
 				E0E1D387203AE45F0011E01A /* WebRequest.swift in Sources */,
+				CEBF96FE283448880061DA36 /* AppDetailFullSreenViewCell.swift in Sources */,
 				F8A1E03C2248382F00FE6448 /* Monads.swift in Sources */,
 				CE9515412815D70000009F28 /* AppDetailHeaderViewController.swift in Sources */,
 				CEDC51F72821489C00AE7B86 /* DetailSongViewController.swift in Sources */,

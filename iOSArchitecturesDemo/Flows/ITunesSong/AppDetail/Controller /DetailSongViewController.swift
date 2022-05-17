@@ -12,9 +12,8 @@ import UIKit
 class DetailSongViewController: UIViewController {
     
     private let song: ITunesSong
-    
     private let imageDownloader =  ImageDownloader()
-   
+
     private var detailView: SongDetailView {
         return self.view as! SongDetailView
     }
@@ -27,6 +26,7 @@ class DetailSongViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     override func loadView() {
         super.loadView()
         self.view = SongDetailView()
@@ -36,16 +36,14 @@ class DetailSongViewController: UIViewController {
         super.viewDidLoad()
         fillData()
     }
-    
 
     private func configureUI(){
         view.backgroundColor = .white
         navigationController?.navigationBar.tintColor = .white
         navigationItem.largeTitleDisplayMode = .never
-  
     }
+    
     private func fillData() {
-  
         guard let date = song.releaseDate else {
             return
         }
@@ -55,10 +53,7 @@ class DetailSongViewController: UIViewController {
         detailView.titleArtistLabel.text = song.artistName
         detailView.nameAlbumLabel.text = song.collectionName
         detailView.nameSongLabel.text = song.trackName
-        
         detailView.genreNameLabel.text = song.primaryGenreName
-        
-        print ("Информация о песни: Артист - \(song.artistName), Альбом - \(song.collectionName),  Название песни - \(song.trackName), Дата релиза: \(releaseDate), Жанр: \(song.primaryGenreName)")
     }
     
     private func downloadImage() {
