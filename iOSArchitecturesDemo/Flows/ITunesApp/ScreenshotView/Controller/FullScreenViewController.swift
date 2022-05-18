@@ -42,7 +42,12 @@ class ScreenshotViewController: UIViewController {
 
         viewCollection.delegate = self
         viewCollection.dataSource = self
+<<<<<<< HEAD:iOSArchitecturesDemo/Flows/ITunesApp/ScreenshotView/Controller/FullScreenViewController.swift
         viewCollection.register(ScreenshotViewCell.self, forCellWithReuseIdentifier: ScreenshotViewCell.reuseID)
+=======
+        view = viewCollection
+        viewCollection.register(AppDeatilScreenshotViewCell.self, forCellWithReuseIdentifier: AppDeatilScreenshotViewCell.reuseID)
+>>>>>>> dev:iOSArchitecturesDemo/Flows/ITunesApp/AppDetail/Controller/FullScreen/FullScreenViewController.swift
     }
 }
 
