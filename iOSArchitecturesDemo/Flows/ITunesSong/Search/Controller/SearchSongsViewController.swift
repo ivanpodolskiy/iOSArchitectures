@@ -27,7 +27,6 @@ class SearchSongsViewController: UIViewController {
     }
     
     //MARK: - Construction
-
     init(presenter: SearchSongViewOutput) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
@@ -38,7 +37,6 @@ class SearchSongsViewController: UIViewController {
     }
     
     // MARK: - Lifecycle
-    
     override func loadView() {
         super.loadView()
         self.view = SearchSongsView()
@@ -56,7 +54,6 @@ class SearchSongsViewController: UIViewController {
         super.viewWillDisappear(animated)
         self.throbber(show: false)
     }
-
 }
 //MARK: - UITableViewDataSource
 extension SearchSongsViewController: UITableViewDataSource {
@@ -86,8 +83,7 @@ extension SearchSongsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let song = searchResults[indexPath.row]
-        let detailViewController = DetailSongViewController(song: song)
-        navigationController?.pushViewController(detailViewController, animated: true)
+        presenter.viewDidSelectSong(song)
     }
 }
 

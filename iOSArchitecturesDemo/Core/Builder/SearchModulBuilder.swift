@@ -20,8 +20,11 @@ class SearchModulBuilder{
 
 class SearchSongModulBuilder {
     static func build() -> (UIViewController & SearchSongViewInput) {
-        let presenter = SearchSongPresenter()
+        let interactor = InteractorSearchSong()
+        let router = RouterSearchSong()
+        let presenter = SearchSongPresenter(interactor: interactor, router: router)
         let viewController = SearchSongsViewController(presenter: presenter)
+        router.viewController = viewController
         presenter.inputViewController = viewController
         return viewController
     }

@@ -13,6 +13,8 @@
 		CE95153F28141F4100009F28 /* AppDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95153E28141F4100009F28 /* AppDetailHeaderView.swift */; };
 		CE9515412815D70000009F28 /* AppDetailHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9515402815D70000009F28 /* AppDetailHeaderViewController.swift */; };
 		CEAFB08028254B8000074327 /* AppDeatilScreenshotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAFB07F28254B8000074327 /* AppDeatilScreenshotViewController.swift */; };
+		CEBF9704283548180061DA36 /* RouterSearchSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF9703283548180061DA36 /* RouterSearchSong.swift */; };
+		CEBF970728354F230061DA36 /* InteractorSearchSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF970628354F230061DA36 /* InteractorSearchSong.swift */; };
 		CEDC51DC281B090400AE7B86 /* AppDetailUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC51DB281B090400AE7B86 /* AppDetailUpdateViewController.swift */; };
 		CEDC51DE281B093F00AE7B86 /* AppDetailUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC51DD281B093F00AE7B86 /* AppDetailUpdateView.swift */; };
 		CEDC51E7281C632E00AE7B86 /* SearchSongsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC51E6281C632E00AE7B86 /* SearchSongsViewController.swift */; };
@@ -55,6 +57,8 @@
 		CE95153E28141F4100009F28 /* AppDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailHeaderView.swift; sourceTree = "<group>"; };
 		CE9515402815D70000009F28 /* AppDetailHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailHeaderViewController.swift; sourceTree = "<group>"; };
 		CEAFB07F28254B8000074327 /* AppDeatilScreenshotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDeatilScreenshotViewController.swift; sourceTree = "<group>"; };
+		CEBF9703283548180061DA36 /* RouterSearchSong.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterSearchSong.swift; sourceTree = "<group>"; };
+		CEBF970628354F230061DA36 /* InteractorSearchSong.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractorSearchSong.swift; sourceTree = "<group>"; };
 		CEDC51DB281B090400AE7B86 /* AppDetailUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailUpdateViewController.swift; sourceTree = "<group>"; };
 		CEDC51DD281B093F00AE7B86 /* AppDetailUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailUpdateView.swift; sourceTree = "<group>"; };
 		CEDC51E6281C632E00AE7B86 /* SearchSongsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSongsViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +137,22 @@
 			path = Builder;
 			sourceTree = "<group>";
 		};
+		CEBF9702283547C70061DA36 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				CEBF9703283548180061DA36 /* RouterSearchSong.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		CEBF970528354F050061DA36 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				CEBF970628354F230061DA36 /* InteractorSearchSong.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
 		CEDC51DF281C626700AE7B86 /* ITunesApp */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +174,8 @@
 		CEDC51E1281C62AE00AE7B86 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				CEBF970528354F050061DA36 /* Interactor */,
+				CEBF9702283547C70061DA36 /* Router */,
 				CEDC51E3281C62C700AE7B86 /* Presenter */,
 				CEDC51E4281C62D800AE7B86 /* View */,
 				CEDC51E5281C62DE00AE7B86 /* Controller */,
@@ -571,6 +593,7 @@
 				F8A97B352249898E00FB2C0E /* AppCell.swift in Sources */,
 				CEDC51EB281C6B1600AE7B86 /* SongCall.swift in Sources */,
 				CEDC51DC281B090400AE7B86 /* AppDetailUpdateViewController.swift in Sources */,
+				CEBF9704283548180061DA36 /* RouterSearchSong.swift in Sources */,
 				CE2022282819C5DB00DBF95F /* SearchPresenter.swift in Sources */,
 				CEDC51FB2821612E00AE7B86 /* AppDeatilScreenshotViewCell.swift in Sources */,
 				F8114FC522A3E77500102830 /* AppDetailView.swift in Sources */,
@@ -588,6 +611,7 @@
 				E0E1D2952034A3350011E01A /* SearchViewController.swift in Sources */,
 				CEDC51F0281EECC600AE7B86 /* SearchSongPresenter.swift in Sources */,
 				E0E1D39F203AE7400011E01A /* ImageDownloader.swift in Sources */,
+				CEBF970728354F230061DA36 /* InteractorSearchSong.swift in Sources */,
 				F8114FBE22A3DBF400102830 /* SearchView.swift in Sources */,
 				CEDC51E7281C632E00AE7B86 /* SearchSongsViewController.swift in Sources */,
 				CEDC51EE281DAD8800AE7B86 /* SongCellModel.swift in Sources */,

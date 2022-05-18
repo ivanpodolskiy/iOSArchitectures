@@ -42,7 +42,6 @@ class FullScreenViewController: UIViewController {
         viewCollection.dataSource = self
         view = viewCollection
         viewCollection.register(AppDeatilScreenshotViewCell.self, forCellWithReuseIdentifier: AppDeatilScreenshotViewCell.reuseID)
-        print ("Внутри")
     }
 
 }

@@ -19,14 +19,23 @@ protocol SearchSongViewInput: class {
 
 protocol SearchSongViewOutput: class {
     func viewDidSearch(with query: String)
+    func viewDidSelectSong(_ song: ITunesSong)
 }
 
 class SearchSongPresenter {
     weak var inputViewController: (UIViewController & SearchSongViewInput)?
-    private let searchService = ITunesSearchService()
+    let interactor: InteractorSearchSongInput
+    let router: RouterSearchSongInput
     
+    //MARK: - Construction
+    init(interactor: InteractorSearchSongInput, router: RouterSearchSongInput) {
+        self.interactor = interactor
+        self.router = router
+    }
+  
+    //MARK: - Private Functions
     private func requestSong(with query: String) {
-        self.searchService.getSongs(forQuery: query) { [weak self] result in
+        interactor.requestSong(with: query) { [weak self] result in
             guard let self = self else { return }
             self.inputViewController?.throbber(show: false)
             result.withValue { songs in
@@ -44,9 +53,15 @@ class SearchSongPresenter {
         }
     }
 }
+
+//MARK: - SearchSongViewOutput
 extension SearchSongPresenter: SearchSongViewOutput{
     func viewDidSearch(with query: String) {
         inputViewController?.throbber(show: true)
         requestSong(with: query)
+    }
+    
+    func viewDidSelectSong(_ song: ITunesSong) {
+      router.openDetailView(for: song)
     }
 }
