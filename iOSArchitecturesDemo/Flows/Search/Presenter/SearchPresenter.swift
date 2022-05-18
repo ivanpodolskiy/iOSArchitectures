@@ -27,6 +27,7 @@ class SearchPresenter {
     
     weak var viewInput: (UIViewController & SearchViewInput)?
     
+    
     private let searchService = ITunesSearchService()
     
     private func requestApps(with query: String) {
@@ -43,6 +44,7 @@ class SearchPresenter {
                     }
                     self.viewInput?.hideNoResults()
                     self.viewInput?.searchResults = apps
+                    
                 }
                 .withError {
                     self.viewInput?.showError(error: $0)
@@ -51,9 +53,10 @@ class SearchPresenter {
     }
     
     private func openAppDetils(with app: ITunesApp) {
-        let appDetailViewController = MainAppDetailViewController(app: app)
+        let appDetailViewController = AppDetailViewController(app: app)
         viewInput?.navigationController?.pushViewController(appDetailViewController, animated: true)
     }
+    
 }
 
 extension SearchPresenter: SearchViewOutput {
@@ -61,7 +64,10 @@ extension SearchPresenter: SearchViewOutput {
         viewInput?.throbber(show: true)
         requestApps(with: query)
     }
+    
     func viewDidSelect(_ app: ITunesApp) {
         openAppDetils(with: app)
     }
+    
+    
 }

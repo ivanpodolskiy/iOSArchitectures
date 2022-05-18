@@ -11,10 +11,12 @@ import UIKit
 final class AppDetailView: UIView {
     
     // MARK: - Subviews
+    
     let imageView = UIImageView()
     let throbber = UIActivityIndicatorView(style: .gray)
     
     // MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.configureUI()
@@ -26,6 +28,7 @@ final class AppDetailView: UIView {
     }
     
     // MARK: - UI
+    
     private func configureUI() {
         self.backgroundColor = .white
         self.addImageView()
@@ -55,8 +58,6 @@ final class AppDetailView: UIView {
             
             self.throbber.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             self.throbber.centerYAnchor.constraint(equalTo: self.centerYAnchor)
-        ])
+            ])
     }
-    
- 
 }
