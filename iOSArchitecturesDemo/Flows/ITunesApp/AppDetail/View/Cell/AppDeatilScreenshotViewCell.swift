@@ -11,12 +11,13 @@ import UIKit
 class AppDeatilScreenshotViewCell: UICollectionViewCell {
     
     static let reuseID = "AppDeatilScreenshotViewCell"
-    
+ 
     private(set) lazy var imageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,6 +27,7 @@ class AppDeatilScreenshotViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         self.layer.cornerRadius = 10
+        
         self.clipsToBounds = true
     }
     
