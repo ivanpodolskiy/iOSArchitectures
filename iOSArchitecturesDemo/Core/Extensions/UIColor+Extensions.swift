@@ -23,3 +23,16 @@ public extension UIColor {
         return UIColor(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: a)
     }
 }
+
+public extension DateFormatter {
+    static func changeDateFomart(date: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+    
+        let dates = dateFormatter.date(from: date)
+        dateFormatter.dateFormat = "dd.MM.yy"
+        let resultDate = dateFormatter.string(from: dates!)
+        return resultDate
+    }
+}
+

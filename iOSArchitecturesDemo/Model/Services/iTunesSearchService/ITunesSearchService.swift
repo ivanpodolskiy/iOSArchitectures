@@ -48,6 +48,7 @@ final class ITunesSearchService {
             result
                 .withValue { data in
                     do {
+                        
                         let result = try self.decoder.decode(ITunesSearchResult<ITunesApp>.self, from: data)
                         let apps = result.results
                         completion?(.success(apps))
@@ -61,6 +62,7 @@ final class ITunesSearchService {
                 }
         }
     }
+    
     
     public func getSongs(forQuery query: String, completion: CompletionSongs?) {
         let regionCode = Locale.current.regionCode ?? defaultRegionCode
@@ -81,6 +83,7 @@ final class ITunesSearchService {
                     do {
                         let result = try self.decoder.decode(ITunesSearchResult<ITunesSong>.self, from: data)
                         let apps = result.results
+                     
                         completion?(.success(apps))
                     } catch {
                         print(error)

@@ -10,13 +10,17 @@ import Foundation
 import UIKit
 
 class AppDetailHeaderViewController: UIViewController {
+    
     private let app: ITunesApp
+    
     private let imageDownloader =  ImageDownloader()
+   
     private var appDetailHeaderView: AppDetailHeaderView {
         return self.view as! AppDetailHeaderView
     }
     
     //MARK: - Construction
+    
     init(app: ITunesApp) {
         self.app = app
         super.init(nibName: nil, bundle: nil)
@@ -27,15 +31,20 @@ class AppDetailHeaderViewController: UIViewController {
     }
     
     //MARK: - lifecycle
+    
     override func loadView() {
         super.loadView()
         self.view = AppDetailHeaderView()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         fillData()
     }
+    
+    
     //MARK: - private functions
+    
     private func fillData() {
         downloadImage()
         appDetailHeaderView.titleLabel.text = app.appName
