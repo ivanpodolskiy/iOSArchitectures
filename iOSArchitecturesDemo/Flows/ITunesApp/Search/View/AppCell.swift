@@ -49,6 +49,11 @@ final class AppCell: UITableViewCell {
     }
     
     // MARK: - Methods
+    func configureTest(titleLabel: String, subtitleLabel: String, retingLabel: String) {
+        self.titleLabel.text = titleLabel
+        self.subtitleLabel.text = subtitleLabel
+        self.ratingLabel.text = retingLabel
+    }
     
     func configure(with cellModel: AppCellModel) {
         self.titleLabel.text = cellModel.title
